@@ -1,9 +1,12 @@
 #include <behaviors/mouse_keys.dtsi>
+#include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
 #define ZMK_MOUSE_DEFAULT_MOVE_VAL 1200  // 600
@@ -50,6 +53,25 @@
         tap-ms = <30>;
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <0 1>;
+        };
+
+        combo_delete {
+            bindings = <&kp DELETE>;
+            key-positions = <24 25>;
+        };
+
+        combo_del {
+            bindings = <&kp BSPC>;
+            key-positions = <11 12>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -64,11 +86,11 @@
             //                                                      enter
 
             bindings = <
-&kp TAB    &kp Q  &kp W      &kp E     &kp R  &kp T          &kp UP_ARROW     &kp Y        &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&td0       &kp A  &kp S      &kp D     &kp F  &kp G          &kp DOWN_ARROW   &kp H        &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LCTRL  &kp Z  &kp X      &kp C     &kp V  &kp B          &kp LEFT_ARROW   &kp N        &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                  &kp SPACE  &kp LGUI  &mo 1  &lt 3 SPACE    &kp RIGHT_ARROW  &lt 3 ENTER  &mo 2  &kp RALT
-                                                             &kp ENTER
+&kp TAB    &kp Q  &kp W      &kp E     &kp R  &kp T        &kp UP_ARROW     &kp Y      &kp U  &kp I      &kp O    &kp P     &mt RIGHT_BRACKET LEFT_BRACKET
+&kp LCTRL  &kp A  &kp S      &kp D     &kp F  &kp G        &kp DOWN_ARROW   &kp H      &kp J  &kp K      &kp L    &kp SEMI  &mt NON_US_BACKSLASH SQT
+&kp LSHFT  &kp Z  &kp X      &kp C     &kp V  &kp B        &kp LEFT_ARROW   &kp N      &kp M  &kp COMMA  &kp DOT  &kp FSLH  &mt EQUAL MINUS
+                  &kp SPACE  &kp LGUI  &mo 1  &kp SPACE    &kp RIGHT_ARROW  &kp ENTER  &mo 2  &kp RALT
+                                                           &kp ENTER
             >;
 
             label = "QWERTY";
@@ -85,11 +107,11 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&trans  &kp N1           &kp N2          &kp N3        &kp N4        &kp N5             &mmv MOVE_UP     &kp N6           &kp N7           &kp N8           &kp N9           &kp N0    &kp BSPC
-&trans  &bt BT_CLR_ALL   &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3       &mmv MOVE_DOWN   &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &kp HOME  &kp PG_UP
-&trans  &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &trans        &trans        &rgb_ug RGB_EFF    &mmv MOVE_LEFT   &rgb_ug RGB_EFR  &rgb_ug RGB_SPI  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp END   &kp PG_DN
-                         &kp C_MUTE      &trans        &trans        &trans             &mmv MOVE_RIGHT  &kp INS          &kp DEL          &trans
-                                                                                        &mkp LCLK
+&kp TAB    &kp N1           &kp N2          &kp N3        &kp N4        &kp N5             &mmv MOVE_UP     &kp N6           &kp N7           &kp N8           &kp N9           &kp N0    &kp KP_MULTIPLY
+&kp LCTRL  &kp MINUS        &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3       &mmv MOVE_DOWN   &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &kp HOME  &kp PG_UP
+&kp LSHFT  &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &trans        &trans        &rgb_ug RGB_EFF    &mmv MOVE_LEFT   &rgb_ug RGB_EFR  &rgb_ug RGB_SPI  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp END   &kp PG_DN
+                            &mkp RCLK       &trans        &trans        &trans             &mmv MOVE_RIGHT  &kp INS          &kp DEL          &trans
+                                                                                           &mkp LCLK
             >;
 
             label = "NUMBER";
